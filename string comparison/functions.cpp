@@ -65,13 +65,13 @@ int totalElements(string a)
 int *comparison(string firstString, string secondString, int result[])
 {
 
-    int elementsFirstString = totalElements(firstString);
     result[0] = 1;
     result[1] = 2;
 
-    int *smallFirstStringFrequency = new int[elementsFirstString];
+    string *string1 = new string[totalElements(firstString)];
+    int *smallFirstStringFrequency = new int[totalElements(firstString)];
 
-    for (int i = 0; i < elementsFirstString; i++)
+    for (int i = 0; i < totalElements(firstString); i++)
     {
         string temp = "";
         static int j = 0;
@@ -80,14 +80,14 @@ int *comparison(string firstString, string secondString, int result[])
             temp += firstString[j];
             j++;
         }
-
+        string1[i] = temp;
         smallFirstStringFrequency[i] = frequencyOfSmalChar(temp);
     }
 
-    int elementsSecondString = totalElements(secondString);
-    int *smallSecondStringFrequency = new int[elementsSecondString];
+    string *string2 = new string[totalElements(secondString)];
+    int *smallSecondStringFrequency = new int[totalElements(secondString)];
 
-    for (int i = 0; i < elementsSecondString; i++)
+    for (int i = 0; i < totalElements(secondString); i++)
     {
         string temp = "";
         static int j = 0;
@@ -96,11 +96,24 @@ int *comparison(string firstString, string secondString, int result[])
             temp += secondString[j];
             j++;
         }
-
+        string2[i] = temp;
         smallSecondStringFrequency[i] = frequencyOfSmalChar(temp);
     }
 
-    
+    for (int i = 0; i < totalElements(secondString); i++)
+    {
+        for (int j = 0; j < totalElements(firstString); j++)
+        {
+            int first = smallestCharacter(string1[j]);
+            int second = smallestCharacter(string2[i]);
+            int counter = 0;
+
+            if (frequencyOfSmalChar(string1[j]) < frequencyOfSmalChar(string2[i]))
+            {
+                result[i] = counter++;
+            }
+        }
+    }
 
     return result;
 }
