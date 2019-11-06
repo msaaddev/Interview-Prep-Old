@@ -2,14 +2,15 @@
 #include <cstring>
 using namespace std;
 
-int *comparison(string firstString, string secondString);
 int smallestAscii(string a);
+int frequencyOfSmalChar(string a);
+int *comparison(string firstString, string secondString);
 
 int main()
 {
     string a = "abcd,bcda";
     string b = "aaa,aa";
-    string c = "ebcd";
+    string c = "ecd";
 
     cout << smallestAscii(c);
 }
@@ -25,7 +26,6 @@ int smallestAscii(string a)
         *(temp + i) = ascii;
     }
 
-    int length = sizeof(temp) / sizeof(*temp);
     int smallestNum;
     smallestNum = *temp;
 
@@ -41,6 +41,24 @@ int smallestAscii(string a)
     return smallestNum;
 }
 
+int frequencyOfSmalChar(string a)
+{
+    int frequency = 0;
+    int conversion;
+    int smallestChar = smallestAscii(a);
+
+    for (int i = 0; i < a.length(); i++)
+    {
+        conversion = a[i];
+        if (smallestChar == conversion)
+        {
+            frequency++;
+        }
+    }
+    return frequency;
+}
+
+
 int *comparison(string firstString, string secondString, int result[])
 {
     string secondTemp = "";
@@ -54,6 +72,8 @@ int *comparison(string firstString, string secondString, int result[])
             totalCombinations++;
     }
 
+    int *smaFirstString = new int[totalCombinations];
+
     for (int i = 0; i < totalCombinations; i++)
     {
         string temp = "";
@@ -63,6 +83,8 @@ int *comparison(string firstString, string secondString, int result[])
             temp += firstString[i];
             i++;
         }
+
+        smaFirstString[i] = smallestAscii(temp);
     }
 
     return result;
