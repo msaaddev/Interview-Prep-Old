@@ -4,13 +4,15 @@ using namespace std;
 int smallestCharacter(string a);
 int frequencyOfSmalChar(string a);
 int totalElements(string a);
-int *comparison(string firstString, string secondString);
+int *comparison(string firstString, string secondString, int result[]);
+
 
 int smallestCharacter(string a)
 {
-    int *temp = new int[a.length()];
+    int length = a.size();
+    int *temp = new int[length];
 
-    for (int i = 0; i < a.length(); i++)
+    for (int i = 0; i < length; i++)
     {
         int ascii = 0;
         ascii = a[i];
@@ -20,11 +22,11 @@ int smallestCharacter(string a)
     int smallestNum;
     smallestNum = *temp;
 
-    for (int i = 0; i < a.length(); i++)
+    for (int i = 0; i < length; i++)
     {
         if (*(temp + i) < smallestNum)
         {
-            smallestNum = temp[i];
+            smallestNum = *(temp + i);
         }
     }
 
@@ -37,11 +39,11 @@ int frequencyOfSmalChar(string a)
     int frequency = 0;
     int conversion;
     int smallestChar = smallestCharacter(a);
-
-    for (int i = 0; i < a.length(); i++)
+    int length = a.size();
+    for (int i = 0; i < length; i++)
     {
         conversion = a[i];
-        if (smallestChar == conversion)
+        if ((smallestChar == conversion))
         {
             frequency++;
         }
@@ -52,8 +54,9 @@ int frequencyOfSmalChar(string a)
 int totalElements(string a)
 {
     int totalCombinations = 1;
+    int length = a.size();
 
-    for (int i = 0; a[i] != '/0'; i++)
+    for (int i = 0; a[i] != '\0'; i++)
     {
         if (a[i] == ',')
             totalCombinations++;
@@ -64,9 +67,6 @@ int totalElements(string a)
 
 int *comparison(string firstString, string secondString, int result[])
 {
-
-    result[0] = 1;
-    result[1] = 2;
 
     string *string1 = new string[totalElements(firstString)];
     int *smallFirstStringFrequency = new int[totalElements(firstString)];
@@ -81,7 +81,13 @@ int *comparison(string firstString, string secondString, int result[])
             j++;
         }
         string1[i] = temp;
-        smallFirstStringFrequency[i] = frequencyOfSmalChar(temp);
+        *(smallFirstStringFrequency + i) = frequencyOfSmalChar(temp);
+        j++;
+    }
+
+    for (int i = 0; i < totalElements(firstString); i++)
+    {
+        cout << *(smallFirstStringFrequency + i) << " space ";
     }
 
     string *string2 = new string[totalElements(secondString)];
@@ -97,7 +103,7 @@ int *comparison(string firstString, string secondString, int result[])
             j++;
         }
         string2[i] = temp;
-        smallSecondStringFrequency[i] = frequencyOfSmalChar(temp);
+        *(smallSecondStringFrequency + i) = frequencyOfSmalChar(temp);
     }
 
     for (int i = 0; i < totalElements(secondString); i++)
@@ -114,6 +120,11 @@ int *comparison(string firstString, string secondString, int result[])
             }
         }
     }
+
+    delete[] string1;
+    delete[] smallFirstStringFrequency;
+    delete[] string2;
+    delete[] smallSecondStringFrequency;
 
     return result;
 }
