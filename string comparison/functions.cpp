@@ -48,20 +48,18 @@ int frequencyOfSmalChar(string a)
     return frequency;
 }
 
-int *comparison(string firstString, string secondString, int result[])
+int totalElements(string a)
 {
-    string secondTemp = "";
     int totalCombinations = 1;
-    result[0] = 1;
-    result[1] = 2;
 
-    for (int i = 0; firstString[i] != '/0'; i++)
+    for (int i = 0; a[i] != '/0'; i++)
     {
-        if (firstString[i] == ',')
+        if (a[i] == ',')
             totalCombinations++;
     }
 
-    int *smalString = new int[totalCombinations];
+    return totalCombinations;
+}
 
     for (int i = 0; i < totalCombinations; i++)
     {
