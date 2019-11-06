@@ -67,7 +67,6 @@ int totalElements(string a)
 
 int *comparison(string firstString, string secondString, int result[])
 {
-
     string *string1 = new string[totalElements(firstString)];
     int *smallFirstStringFrequency = new int[totalElements(firstString)];
 
@@ -75,7 +74,7 @@ int *comparison(string firstString, string secondString, int result[])
     {
         string temp = "";
         static int j = 0;
-        while (firstString[j] != ',')
+        while (firstString[j] != ',' && firstString[j] != '\0')
         {
             temp += firstString[j];
             j++;
@@ -85,11 +84,6 @@ int *comparison(string firstString, string secondString, int result[])
         j++;
     }
 
-    for (int i = 0; i < totalElements(firstString); i++)
-    {
-        cout << *(smallFirstStringFrequency + i) << " space ";
-    }
-
     string *string2 = new string[totalElements(secondString)];
     int *smallSecondStringFrequency = new int[totalElements(secondString)];
 
@@ -97,28 +91,34 @@ int *comparison(string firstString, string secondString, int result[])
     {
         string temp = "";
         static int j = 0;
-        while (secondString[j] != ',')
+        while (secondString[j] != ',' && secondString[j] != '\0')
         {
             temp += secondString[j];
             j++;
         }
+
         string2[i] = temp;
         *(smallSecondStringFrequency + i) = frequencyOfSmalChar(temp);
+        j++;
     }
 
     for (int i = 0; i < totalElements(secondString); i++)
     {
+        static int counter = 0;
         for (int j = 0; j < totalElements(firstString); j++)
         {
-            int first = smallestCharacter(string1[j]);
-            int second = smallestCharacter(string2[i]);
-            int counter = 0;
 
             if (frequencyOfSmalChar(string1[j]) < frequencyOfSmalChar(string2[i]))
             {
-                result[i] = counter++;
+                counter++;
+                result[i] = counter;
+            }
+            else
+            {
+                result[i] = 0;
             }
         }
+        counter = 0;
     }
 
     delete[] string1;

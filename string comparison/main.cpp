@@ -11,12 +11,14 @@ int main()
     int *arr = new int[5];
     int result[2];
 
-    arr = comparison(a, b, result); 
+    arr = comparison(a, b, result);
 
+    cout << "[";
     for (int i = 0; i < 2; i++)
     {
-        cout << arr[i] << " ";
+        cout << " " << arr[i] << " ";
     }
+    cout << "]";
 
     delete[] arr;
 }
