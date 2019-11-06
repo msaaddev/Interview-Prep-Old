@@ -9,7 +9,7 @@ int main()
 {
     string a = "abcd,bcda";
     string b = "aaa,aa";
-    string c = "aacd";
+    string c = "ebcd";
 
     cout << smallestAscii(c);
 }
@@ -29,10 +29,12 @@ int smallestAscii(string a)
     int smallestNum;
     smallestNum = *temp;
 
-    for (int i = 0; i < length; i++)
+    for (int i = 0; i < a.length(); i++)
     {
-        if (temp[i] <= smallestNum)
+        if (*(temp + i) < smallestNum)
+        {
             smallestNum = temp[i];
+        }
     }
 
     delete[] temp;
