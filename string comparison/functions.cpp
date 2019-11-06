@@ -1,11 +1,12 @@
 #include <iostream>
 using namespace std;
 
-int smallestAscii(string a);
+int smallestCharacter(string a);
 int frequencyOfSmalChar(string a);
+int totalElements(string a);
 int *comparison(string firstString, string secondString);
 
-int smallestAscii(string a)
+int smallestCharacter(string a)
 {
     int *temp = new int[a.length()];
 
@@ -35,7 +36,7 @@ int frequencyOfSmalChar(string a)
 {
     int frequency = 0;
     int conversion;
-    int smallestChar = smallestAscii(a);
+    int smallestChar = smallestCharacter(a);
 
     for (int i = 0; i < a.length(); i++)
     {
@@ -61,7 +62,16 @@ int totalElements(string a)
     return totalCombinations;
 }
 
-    for (int i = 0; i < totalCombinations; i++)
+int *comparison(string firstString, string secondString, int result[])
+{
+
+    int elementsFirstString = totalElements(firstString);
+    result[0] = 1;
+    result[1] = 2;
+
+    int *smallFirstStringFrequency = new int[elementsFirstString];
+
+    for (int i = 0; i < elementsFirstString; i++)
     {
         string temp = "";
         static int j = 0;
@@ -71,8 +81,26 @@ int totalElements(string a)
             j++;
         }
 
-        smalString[i] = frequencyOfSmalChar(temp);
+        smallFirstStringFrequency[i] = frequencyOfSmalChar(temp);
     }
+
+    int elementsSecondString = totalElements(secondString);
+    int *smallSecondStringFrequency = new int[elementsSecondString];
+
+    for (int i = 0; i < elementsSecondString; i++)
+    {
+        string temp = "";
+        static int j = 0;
+        while (secondString[j] != ',')
+        {
+            temp += secondString[j];
+            j++;
+        }
+
+        smallSecondStringFrequency[i] = frequencyOfSmalChar(temp);
+    }
+
+    
 
     return result;
 }
