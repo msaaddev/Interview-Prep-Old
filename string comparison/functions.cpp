@@ -68,7 +68,6 @@ int totalElements(string a)
 int *comparison(string firstString, string secondString, int result[])
 {
     string *string1 = new string[totalElements(firstString)];
-    int *smallFirstStringFrequency = new int[totalElements(firstString)];
 
     for (int i = 0; i < totalElements(firstString); i++)
     {
@@ -80,12 +79,10 @@ int *comparison(string firstString, string secondString, int result[])
             j++;
         }
         string1[i] = temp;
-        *(smallFirstStringFrequency + i) = frequencyOfSmalChar(temp);
         j++;
     }
 
     string *string2 = new string[totalElements(secondString)];
-    int *smallSecondStringFrequency = new int[totalElements(secondString)];
 
     for (int i = 0; i < totalElements(secondString); i++)
     {
@@ -98,7 +95,6 @@ int *comparison(string firstString, string secondString, int result[])
         }
 
         string2[i] = temp;
-        *(smallSecondStringFrequency + i) = frequencyOfSmalChar(temp);
         j++;
     }
 
@@ -122,9 +118,6 @@ int *comparison(string firstString, string secondString, int result[])
     }
 
     delete[] string1;
-    delete[] smallFirstStringFrequency;
     delete[] string2;
-    delete[] smallSecondStringFrequency;
-
     return result;
 }
