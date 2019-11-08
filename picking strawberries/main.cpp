@@ -4,6 +4,12 @@
     50 10 20 30 40
 
     Output: 90
+
+    130
+    6
+    50 10 20 30 40 50
+
+    Output: 130
  */
 
 #include <iostream>
