@@ -12,10 +12,11 @@ using namespace std;
 
 int maxPic(int num, int *&arr, int length)
 {
-    int  max = arr[0];
+    int max = arr[0], temp;
 
     for (int i = 0; i < length - 2; i++)
     {
+        temp = arr[0];
         for (int j = i + 2; j < length; j++)
         {
             if (arr[i] + arr[j] > max && arr[i] + arr[j] < num)
@@ -23,7 +24,18 @@ int maxPic(int num, int *&arr, int length)
                 max = arr[i] + arr[j];
             }
         }
+
+        for (int j = i + 2; j < length; j += 2)
+        {
+            if (arr[i] + arr[j] > temp && arr[i] + arr[j] < num)
+            {
+                temp = temp + arr[j];
+                if (temp > max)
+                    max = temp;
+            }
+        }
     }
+    cout << endl;
     return max;
 }
 
